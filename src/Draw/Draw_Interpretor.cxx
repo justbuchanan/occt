@@ -229,6 +229,7 @@ static void CommandDelete (ClientData theClientData)
 Draw_Interpretor::Draw_Interpretor() :
   isAllocated(Standard_False), myDoLog(Standard_False), myDoEcho(Standard_False), myFDLog(-1)
 {
+  std::cerr << "Draw_Interpreter::Draw_Interpretor()" << std::endl;
 // The tcl interpreter is not created immediately as it is kept 
 // by a global variable and created and deleted before the main().
   myInterp  = NULL;
@@ -241,6 +242,7 @@ Draw_Interpretor::Draw_Interpretor() :
 
 void Draw_Interpretor::Init()
 {
+  std::cerr << "Draw_Interpreter::Init()" << std::endl;
   if (isAllocated) 
     Tcl_DeleteInterp(myInterp);
   isAllocated=Standard_True;
@@ -258,6 +260,7 @@ Draw_Interpretor::Draw_Interpretor(const Draw_PInterp& p) :
   myDoLog(Standard_False),
   myDoEcho(Standard_False)
 {
+  std::cerr << "Draw_Interpreter::Draw_Interpretor()" << std::endl;
 }
 
 //=======================================================================
@@ -524,6 +527,8 @@ Draw_Interpretor::~Draw_Interpretor()
     myFDLog = 0;
   }
 
+  if (isAllocated) {
+
   // MKV 01.02.05
 #if ((TCL_MAJOR_VERSION > 8) || ((TCL_MAJOR_VERSION == 8) && (TCL_MINOR_VERSION >= 4)))
   try {
@@ -540,6 +545,7 @@ Draw_Interpretor::~Draw_Interpretor()
   Tcl_Exit(0);
 #endif  
 #endif
+  }
 }
 
 //=======================================================================
