@@ -1,10 +1,10 @@
 
 new_local_repository(
-    name="freetype",
+    name="freetype2",
     build_file_content = """
 package(default_visibility=["//visibility:public"])
 cc_library(
-    name="freetype",
+    name="freetype2",
     hdrs=glob([
         "*.h",
         "config/*.h",
