@@ -59,3 +59,5 @@ Release
 /stamp*
 /build*
 /install
+
+/bazel-*
