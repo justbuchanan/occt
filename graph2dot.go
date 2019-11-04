@@ -2,11 +2,11 @@ package main
 
 import (
 	"encoding/json"
-	"strings"
 	"flag"
 	"fmt"
 	"io/ioutil"
 	"log"
+	"strings"
 )
 
 var (
