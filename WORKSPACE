@@ -25,9 +25,8 @@ package(default_visibility=["//visibility:public"])
 cc_library(
     name="tcl",
     hdrs=glob([
-        "*.h",
+        "tcl*.h",
     ]),
-    includes=["./"],
 )
     """,
     path="/usr/include/tcl8.6",
