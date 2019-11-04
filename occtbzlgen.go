@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bitbucket.org/creachadair/stringset"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -11,6 +10,8 @@ import (
 	"path/filepath"
 	"regexp"
 	"sync"
+
+	"bitbucket.org/creachadair/stringset"
 )
 
 var (
@@ -77,7 +78,6 @@ func findDeps(dir string) (stringset.Set, error) {
 		return nil, err
 	}
 
-	fmt.Printf("LOOKING AT DIR: %s\n", dir)
 	inclPat := regexp.MustCompile("#include (\"|<)(?P<path>.+)(\"|>)")
 
 	for _, fi := range files {

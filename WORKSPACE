@@ -1,6 +1,5 @@
-
 new_local_repository(
-    name="freetype2",
+    name = "freetype2",
     build_file_content = """
 package(default_visibility=["//visibility:public"])
 cc_library(
@@ -14,12 +13,11 @@ cc_library(
     includes=["./", "freetype"],
 )
     """,
-    path="/usr/include/freetype2",
+    path = "/usr/include/freetype2",
 )
 
-
 new_local_repository(
-    name="tcl",
+    name = "tcl",
     build_file_content = """
 package(default_visibility=["//visibility:public"])
 cc_library(
@@ -29,5 +27,5 @@ cc_library(
     ]),
 )
     """,
-    path="/usr/include/tcl8.6",
+    path = "/usr/include/tcl",
 )
