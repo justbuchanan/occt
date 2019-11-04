@@ -43,7 +43,7 @@ func subdirFromInclude_mem(filename string) (string, error) {
 	return e, nil
 }
 
-func subdirFromInclude(filename string) (string, error) {
+func (cmd*)subdirFromInclude(filename string) (string, error) {
 	glob := filepath.Join(*srcdir, "*", filename)
 	m, err := filepath.Glob(glob)
 	if err != nil {
@@ -218,6 +218,7 @@ func (s *genDepgraphSubcommand) Execute(_ context.Context, f *flag.FlagSet, _ ..
 }
 
 type genBazelSubcommand struct {
+	depgraphFile string
 }
 
 func (*genBazelSubcommand) Name() string { return "genbazel" }
@@ -229,28 +230,11 @@ func (*genBazelSubcommand) Usage() string {
 	return "genbazel --graph"
 }
 func (s *genBazelSubcommand) SetFlags(f *flag.FlagSet) {
-	// f.StringVar(&s.srcdir, "srcdir", "", "Path to 'src' subdirectory of OCCT project")
+	f.StringVar(&s.depgraphFile, "graph", "", "Path to  subdirectory of OCCT project")
 }
 
 func (s *genBazelSubcommand) Execute(_ context.Context, f *flag.FlagSet, _ ...interface{}) subcommands.ExitStatus {
-	// TODO
-	return subcommands.ExitSuccess
-}
-
-var (
-	graphFile = flag.String("graph", "graph.json", "path to graph json file")
-)
-
-type libSpec struct {
-	name    string
-	pkgs    []string
-	pkgDeps []string
-}
-
-func main() {
-	flag.Parse()
-
-	b, err := ioutil.ReadFile(*graphFile)
+	b, err := ioutil.ReadFile(s.depgraphFile)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -313,7 +297,18 @@ func main() {
 	if err := genAllBzl(libs); err != nil {
 		log.Fatal(err)
 	}
+
+
+	// TODO
+	return subcommands.ExitSuccess
 }
+
+type libSpec struct {
+	name    string
+	pkgs    []string
+	pkgDeps []string
+}
+
 
 func genAllBzl(libs []*libSpec) error {
 	for _, l := range libs {
